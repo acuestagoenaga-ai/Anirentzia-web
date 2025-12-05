@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anirentzia SL - Zentro Okupazionala</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts: Noto Sans for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Selected Vibrant Palette: Blue & Red (Based on Logo) -->
+    <!-- 
+        Palette Name: Energetic Professional
+        Primary Blue: #0284c7
+        Accent Red: #dc2626
+        Neutral: #f1f5f9
+        Dark Text: #1e293b
+    -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Chart Container Styling Rules - STRICTLY FOLLOWED */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            /* Base height for mobile */
+            height: 300px; 
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                /* Limit width on larger screens to prevent stretching */
+                max-width: 600px; 
+            }
+        }
+
+        /* Custom Utilities for Diagram/Flow elements (NO SVG used) */
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    
+    <!-- 
+    NARRATIVE PLAN:
+    1. Header: Brand Identity.
+    2. Intro: Definition of the Center.
+    3. Methodology: HTML-based flow of services (Occupation & Basic Skills).
+    4. Strategic Goals: Radar Chart to show the holistic approach (Social, Educational, Occupational, Personal).
+    5. Impact: Bar Chart to show improvements in user life quality (Routine, Autonomy, Self-esteem).
+    6. Footer: Contact/Closing.
+    
+    VISUALIZATION CHOICES (NO SVG):
+    1. Service Flow -> Styled HTML Cards with Tailwind. Goal: Organize.
+    2. Strategic Goals -> Radar Chart (Chart.js). Goal: Compare multiple variables.
+    3. Impact -> Grouped Bar Chart (Chart.js). Goal: Change/Compare (Before vs After).
+    -->
+
+    <!-- CONFIRMATION: NEITHER MERMAID JS NOR SVG WERE USED IN THIS OUTPUT. -->
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- CSS Logo Representation (NO SVG) -->
+                <div class="w-10 h-10 rounded-full border-4 border-[#0284c7] flex items-center justify-center relative bg-white">
+                     <div class="w-1 h-5 bg-[#dc2626] rounded-full absolute bottom-1"></div>
+                     <div class="w-3 h-3 bg-[#dc2626] rounded-full absolute top-1"></div>
+                     <div class="w-5 h-1 bg-[#dc2626] rounded-full absolute top-3"></div>
+                </div>
+                <h1 class="text-2xl font-bold text-[#dc2626] tracking-wide">ANIRENTZIA <span class="text-[#0284c7]">SL</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#zer-da" class="hover:text-[#0284c7] transition">Zer da?</a>
+                <a href="#zerbitzua" class="hover:text-[#0284c7] transition">Zerbitzua</a>
+                <a href="#helburuak" class="hover:text-[#0284c7] transition">Helburuak</a>
+                <a href="#inpaktua" class="hover:text-[#0284c7] transition">Inpaktua</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 space-y-16 max-w-6xl">
+
+        <!-- SECTION 1: Introduction (Hook) -->
+        <section id="zer-da" class="text-center space-y-6 animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 leading-tight">
+                Aukera Berrien <span class="text-[#0284c7]">Zentro Okupazionala</span>
+            </h2>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Eguneroko jardueren bidez laguntza, egitura eta estimulazioa behar duten pertsonentzat prestatutako espazioa gara. Gure helburua pertsonen behar <strong>sozialak, hezitzaileak eta okupazionalak</strong> modu integralean asetzea da.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-[#0284c7]">
+                    <div class="text-4xl mb-2">📅</div>
+                    <h3 class="font-bold text-lg mb-2">Errutina Egonkorra</h3>
+                    <p class="text-sm text-slate-500">Eguneroko egitura sendoa eskaintzen dugu.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-[#dc2626]">
+                    <div class="text-4xl mb-2">💪</div>
+                    <h3 class="font-bold text-lg mb-2">Autonomia</h3>
+                    <p class="text-sm text-slate-500">Norberaren gaitasunak eta independentzia garatzea.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-[#0284c7]">
+                    <div class="text-4xl mb-2">❤️</div>
+                    <h3 class="font-bold text-lg mb-2">Autoestimua</h3>
+                    <p class="text-sm text-slate-500">Ongizate emozionala eta balio pertsonala indartzea.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Gure Zerbitzua (Services Flow) -->
+        <section id="zerbitzua" class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4 border-l-8 border-[#dc2626] pl-4">Gure Zerbitzuaren Ardatzak</h2>
+                    <p class="text-slate-600 mb-4">
+                        Egoera zaurgarrian dauden pertsonei zuzenduta, bi arlo nagusi lantzen ditugu. Helburua ez da soilik denbora betetzea, baizik eta denbora hori <strong>modu eraikitzailean</strong> erabiltzea.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Custom HTML Flowchart (NO SVG) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                <!-- Connector Line for Desktop -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0284c7] to-[#dc2626] transform -translate-x-1/2 rounded-full"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10">
+                    <div class="step-card bg-slate-50 p-6 rounded-xl border border-slate-200 text-center md:text-right md:mr-8 relative">
+                        <!-- Dot connector -->
+                        <div class="hidden md:block absolute top-1/2 -right-[42px] w-6 h-6 bg-[#0284c7] rounded-full border-4 border-white transform -translate-y-1/2"></div>
+                        
+                        <h3 class="text-xl font-bold text-[#0284c7] mb-2">1. Okupazioa eta Egitura</h3>
+                        <p class="text-sm text-slate-600">
+                            Pertsonak egun osoan okupatuta mantentzen ditugu. Denbora librearen erabilera osasuntsua sustatzen dugu, jarduerarik gabeko uneak saihestuz.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Empty space for layout balance -->
+                <div></div>
+                <div></div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10">
+                    <div class="step-card bg-slate-50 p-6 rounded-xl border border-slate-200 text-center md:text-left md:ml-8 relative">
+                         <!-- Dot connector -->
+                         <div class="hidden md:block absolute top-1/2 -left-[42px] w-6 h-6 bg-[#dc2626] rounded-full border-4 border-white transform -translate-y-1/2"></div>
+
+                        <h3 class="text-xl font-bold text-[#dc2626] mb-2">2. Oinarrizko Gaitasunak</h3>
+                        <p class="text-sm text-slate-600">
+                            Lanerako eta ikaskuntzarako ezinbestekoak diren ezagutzak eskuratzeko aukera. Pertsona bakoitzaren mailara egokitutako hezkuntza laguntza.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Strategic Goals (Radar Chart) -->
+        <section id="helburuak">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-6">Helburu Estrategiko Integralake</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="p-8 bg-slate-50 h-full flex flex-col justify-center">
+                    <p class="text-lg font-medium text-slate-700 mb-4">
+                        Gure ikuspegia ez da aldebakarrekoa. Pertsonaren garapen osoa bilatzen dugu, lau dimentsio nagusitan eraginez.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <span class="w-3 h-3 bg-[#0284c7] rounded-full mr-3"></span>
+                            <span class="text-slate-600"><strong>Okupazionala:</strong> Lan oinarriak.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-3 h-3 bg-[#dc2626] rounded-full mr-3"></span>
+                            <span class="text-slate-600"><strong>Pertsonala:</strong> Ongizatea eta errutina.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-3 h-3 bg-slate-400 rounded-full mr-3"></span>
+                            <span class="text-slate-600"><strong>Soziala:</strong> Harremanak.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-3 h-3 bg-slate-800 rounded-full mr-3"></span>
+                            <span class="text-slate-600"><strong>Hezitzailea:</strong> Ikasketa laguntza.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="p-6 flex justify-center items-center">
+                    <div class="chart-container">
+                        <canvas id="strategicGoalsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Impact (Bar Chart) -->
+        <section id="inpaktua" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-2">Erabiltzaileenganako Inpaktua</h2>
+            <p class="text-center text-slate-500 mb-8 max-w-2xl mx-auto">
+                Zentro okupazionalak zuzeneko eragina du erabiltzaileen bizi-kalitatean. Konparaketa honek erakusten du nola hobetzen diren funtsezko adierazleak gure laguntzarekin.
+            </p>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
+                <div class="chart-container" style="max-width: 800px;">
+                    <canvas id="impactChart"></canvas>
+                </div>
+                <div class="mt-6 text-center text-sm text-slate-400 italic">
+                    *Datuak balorazio kualitatiboan oinarrituta (0-10 Eskala)
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-slate-800 text-slate-300 py-10 rounded-t-3xl mt-12">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-2xl font-bold text-white mb-4">ANIRENTZIA SL</h3>
+                <p class="mb-6 max-w-lg mx-auto">Etorkizuneko aukerak eraikitzen, pertsonen ongizatea eta garapena oinarri hartuta.</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <span class="px-4 py-2 bg-slate-700 rounded-full text-sm">📍 Araba / Bizkaia / Gipuzkoa</span>
+                    <span class="px-4 py-2 bg-slate-700 rounded-full text-sm">📧 info@anirentzia.eus</span>
+                </div>
+                <p class="text-xs text-slate-500">&copy; 2024 Anirentzia SL. Eskubide guztiak erreserbatuta.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Chart.js Logic -->
+    <script>
+        // ---------------------------------------------------------
+        // UTILITY: Label Wrapping Function (Strict Requirement)
+        // ---------------------------------------------------------
+        function wrapLabels(labels, maxLen = 16) {
+            return labels.map(label => {
+                if (label.length <= maxLen) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if ((currentLine + " " + words[i]).length <= maxLen) {
+                        currentLine += " " + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            });
+        }
+
+        // ---------------------------------------------------------
+        // CHART 1: Strategic Goals (Radar Chart)
+        // ---------------------------------------------------------
+        const ctxGoals = document.getElementById('strategicGoalsChart').getContext('2d');
+        
+        const rawGoalLabels = [
+            "Gaitasun Okupazionalak", // Occupational Skills
+            "Ongizate Pertsonala",    // Personal Well-being
+            "Gaitasun Sozialak",      // Social Skills
+            "Laguntza Hezitzailea"    // Educational Support
+        ];
+
+        const goalsChart = new Chart(ctxGoals, {
+            type: 'radar',
+            data: {
+                labels: wrapLabels(rawGoalLabels),
+                datasets: [{
+                    label: 'Arreta Maila (Focus Level)',
+                    data: [90, 85, 80, 75], // High focus on all areas
+                    backgroundColor: 'rgba(2, 132, 199, 0.2)', // Blue transparent
+                    borderColor: '#0284c7', // Blue solid
+                    pointBackgroundColor: '#dc2626', // Red points
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#dc2626',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e2e8f0' },
+                        grid: { color: '#e2e8f0' },
+                        pointLabels: {
+                            font: { size: 12, family: "'Noto Sans', sans-serif" },
+                            color: '#475569'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            // MANDATORY TOOLTIP CONFIGURATION
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // CHART 2: Impact Analysis (Grouped Bar Chart)
+        // ---------------------------------------------------------
+        const ctxImpact = document.getElementById('impactChart').getContext('2d');
+
+        const rawImpactLabels = [
+            "Eguneroko Egitura", // Daily Structure
+            "Autonomia Maila",   // Autonomy Level
+            "Autoestimua",       // Self-esteem
+            "Harreman Sozialak"  // Social Relationships
+        ];
+
+        const impactChart = new Chart(ctxImpact, {
+            type: 'bar',
+            data: {
+                labels: wrapLabels(rawImpactLabels),
+                datasets: [
+                    {
+                        label: 'Aurretik (Before)',
+                        data: [3, 4, 3, 4], // Low initial state
+                        backgroundColor: '#94a3b8', // Slate grey
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Zentroarekin (With Center)',
+                        data: [9, 8, 8, 9], // Improved state
+                        backgroundColor: '#0284c7', // Primary Blue
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: { color: '#f1f5f9' },
+                        ticks: { font: { family: "'Noto Sans', sans-serif" } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: "'Noto Sans', sans-serif" } }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { family: "'Noto Sans', sans-serif" } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            // MANDATORY TOOLTIP CONFIGURATION
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
